@@ -1,0 +1,19 @@
+{
+    "variants": {
+        "facing=east": {
+            "model": "animal_self_feed:block/food_container",
+            "y": 90
+        },
+        "facing=north": {
+            "model": "animal_self_feed:block/food_container"
+        },
+        "facing=south": {
+            "model": "animal_self_feed:block/food_container",
+            "y": 180
+        },
+        "facing=west": {
+            "model": "animal_self_feed:block/food_container",
+            "y": 270
+        }
+    }
+}
