@@ -9,6 +9,7 @@ import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import slexom.vf.animal_self_feed.block.entity.FoodContainerBlockEntity;
 
@@ -33,12 +34,12 @@ public class SelfFeedGoal extends MoveToTargetPosGoal {
 
     @Override
     public boolean canStart() {
-        return super.canStart() && this.mob.canEat() && !this.mob.isBaby();
+        return this.mob.canEat() && !this.mob.isBaby();
     }
 
     @Override
     public boolean shouldContinue() {
-        return super.shouldContinue() && this.mob.canEat();
+        return  this.feeder != null && this.mob.canEat();
     }
 
     public double getDesiredSquaredDistanceToTarget() {
@@ -53,7 +54,7 @@ public class SelfFeedGoal extends MoveToTargetPosGoal {
             ItemStack itemStack = foodContainerBlockEntity.getItems().get(0);
             boolean hasCorrectFood = this.food.test(itemStack);
             if (hasCorrectFood) {
-                feeder = foodContainerBlockEntity;
+                this.feeder = foodContainerBlockEntity;
                 return true;
             }
         }
@@ -61,20 +62,18 @@ public class SelfFeedGoal extends MoveToTargetPosGoal {
     }
 
     public void tick() {
-        super.tick();
+        World world = this.mob.world;
+        int age = this.mob.getBreedingAge();
         if (this.hasReached()) {
-            if (feeder != null) {
-                int age = this.mob.getBreedingAge();
-                if (!this.mob.world.isClient && age == 0 && this.mob.canEat()) {
-                    feeder.getItems().get(0).decrement(1);
+            if (this.feeder != null) {
+                if (!world.isClient && age == 0 && this.mob.canEat()) {
+                    this.feeder.getItems().get(0).decrement(1);
                     this.mob.lovePlayer(null);
-                }
-                if (this.mob.isBaby()) {
-                    feeder.getItems().get(0).decrement(1);
-                    this.mob.growUp((int) ((float) (-age / 20) * 0.1F), true);
+                    this.feeder = null;
                 }
             }
         }
+        super.tick();
     }
 
 }

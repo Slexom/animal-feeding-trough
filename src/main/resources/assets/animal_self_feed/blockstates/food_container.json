@@ -1,19 +1,41 @@
 {
-    "variants": {
-        "facing=east": {
-            "model": "animal_self_feed:block/food_container",
-            "y": 90
+    "multipart": [
+        {
+            "apply": {
+                "model": "animal_self_feed:block/food_container"
+            }
         },
-        "facing=north": {
-            "model": "animal_self_feed:block/food_container"
+        {
+            "when": {
+                "level": "1"
+            },
+            "apply": {
+                "model": "animal_self_feed:block/food_container_content_1"
+            }
         },
-        "facing=south": {
-            "model": "animal_self_feed:block/food_container",
-            "y": 180
+        {
+            "when": {
+                "level": "2"
+            },
+            "apply": {
+                "model": "animal_self_feed:block/food_container_content_2"
+            }
         },
-        "facing=west": {
-            "model": "animal_self_feed:block/food_container",
-            "y": 270
+        {
+            "when": {
+                "level": "3"
+            },
+            "apply": {
+                "model": "animal_self_feed:block/food_container_content_3"
+            }
+        },
+        {
+            "when": {
+                "level": "4"
+            },
+            "apply": {
+                "model": "animal_self_feed:block/food_container_content_4"
+            }
         }
-    }
+    ]
 }
