@@ -34,12 +34,12 @@ public class SelfFeedGoal extends MoveToTargetPosGoal {
 
     @Override
     public boolean canStart() {
-        return this.mob.canEat() && !this.mob.isBaby();
+        return super.canStart() && this.mob.canEat() && !this.mob.isBaby();
     }
 
     @Override
     public boolean shouldContinue() {
-        return  this.feeder != null && this.mob.canEat();
+        return super.shouldContinue() && this.feeder != null && this.mob.canEat();
     }
 
     public double getDesiredSquaredDistanceToTarget() {

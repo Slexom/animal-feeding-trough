@@ -1,6 +1,7 @@
 package slexom.vf.animal_self_feed;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -35,7 +36,7 @@ public class AnimalSelfFeedMod implements ModInitializer {
     public void onInitialize() {
         FOOD_CONTAINER_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(REGISTRY_NAME, FoodContainerScreenHandler::new);
         FOOD_CONTAINER_BLOCK = Registry.register(Registry.BLOCK, REGISTRY_NAME, new FoodContainerBlock(AbstractBlock.Settings.of(Material.WOOD).sounds(BlockSoundGroup.WOOD).strength(0.2F).nonOpaque()));
-        FOOD_CONTAINER_BLOCK_ITEM = Registry.register(Registry.ITEM, REGISTRY_NAME, new BlockItem(FOOD_CONTAINER_BLOCK, new Item.Settings().group(ItemGroup.MISC)));
+        FOOD_CONTAINER_BLOCK_ITEM = Registry.register(Registry.ITEM, REGISTRY_NAME, new BlockItem(FOOD_CONTAINER_BLOCK, new FabricItemSettings().group(ItemGroup.MISC)));
         FOOD_CONTAINER_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, REGISTRY_NAME, BlockEntityType.Builder.create(FoodContainerBlockEntity::new, FOOD_CONTAINER_BLOCK).build(null));
         LOGGER.info("[Animal Self Feed] Load Complete! Enjoy :D");
     }
