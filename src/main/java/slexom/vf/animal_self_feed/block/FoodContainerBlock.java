@@ -13,6 +13,7 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.*;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -21,6 +22,7 @@ import slexom.vf.animal_self_feed.block.entity.FoodContainerBlockEntity;
 public class FoodContainerBlock extends BlockWithEntity {
     public static final DirectionProperty FACING = FacingBlock.FACING;
     public static final IntProperty LEVEL = Properties.LEVEL_8;
+    private static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 9.0D, 16.0D);
 
     public FoodContainerBlock(Settings settings) {
         super(settings);
@@ -30,6 +32,10 @@ public class FoodContainerBlock extends BlockWithEntity {
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
         stateManager.add(LEVEL, FACING);
+    }
+
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        return SHAPE;
     }
 
     public BlockState rotate(BlockState state, BlockRotation rotation) {
