@@ -1,10 +1,7 @@
 package slexom.vf.animal_feeding_trough.ai.goal;
 
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.goal.MoveToTargetPosGoal;
-import net.minecraft.entity.ai.pathing.BirdNavigation;
-import net.minecraft.entity.ai.pathing.MobNavigation;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
@@ -12,8 +9,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import slexom.vf.animal_feeding_trough.block.entity.FeedingTroughBlockEntity;
-
-import java.util.EnumSet;
 
 public class SelfFeedGoal extends MoveToTargetPosGoal {
 
@@ -26,24 +21,25 @@ public class SelfFeedGoal extends MoveToTargetPosGoal {
         super(mob, speed, 8);
         this.mob = mob;
         this.food = food;
-        this.setControls(EnumSet.of(Goal.Control.MOVE, Goal.Control.LOOK));
-        if (!(mob.getNavigation() instanceof MobNavigation) && !(mob.getNavigation() instanceof BirdNavigation)) {
-            throw new IllegalArgumentException("Unsupported mob type for TemptGoal");
-        }
     }
 
     @Override
     public boolean canStart() {
-        return super.canStart() && this.mob.canEat() && !this.mob.isBaby();
+        return this.mob.canEat() && this.mob.getBreedingAge() == 0 && super.canStart();
     }
 
     @Override
     public boolean shouldContinue() {
-        return super.shouldContinue() && this.feeder != null && this.mob.canEat();
+        return super.shouldContinue() && this.feeder != null && this.mob.canEat() && this.mob.getBreedingAge() == 0;
     }
 
+    @Override
     public double getDesiredSquaredDistanceToTarget() {
         return 2.0D;
+    }
+
+    private boolean hasCorrectFood(ItemStack itemStack) {
+        return this.food.test(itemStack);
     }
 
     @Override
@@ -52,8 +48,7 @@ public class SelfFeedGoal extends MoveToTargetPosGoal {
         if (blockEntity instanceof FeedingTroughBlockEntity) {
             FeedingTroughBlockEntity feedingTroughBlockEntity = (FeedingTroughBlockEntity) blockEntity;
             ItemStack itemStack = feedingTroughBlockEntity.getItems().get(0);
-            boolean hasCorrectFood = this.food.test(itemStack);
-            if (hasCorrectFood) {
+            if (!itemStack.isEmpty() && hasCorrectFood(itemStack)) {
                 this.feeder = feedingTroughBlockEntity;
                 return true;
             }
@@ -61,17 +56,18 @@ public class SelfFeedGoal extends MoveToTargetPosGoal {
         return false;
     }
 
+    @Override
     public void tick() {
         World world = this.mob.world;
-        int age = this.mob.getBreedingAge();
-        if (this.hasReached()) {
-            if (this.feeder != null) {
-                if (!world.isClient && age == 0 && this.mob.canEat()) {
+        if (!world.isClient && this.feeder != null && this.mob.canEat()) {
+            if (!this.feeder.getItems().get(0).isEmpty()) {
+                this.mob.getLookControl().lookAt((double) this.targetPos.getX() + 0.5D, this.targetPos.getY(), (double) this.targetPos.getZ() + 0.5D, 10.0F, (float) this.mob.getLookPitchSpeed());
+                if (this.hasReached()) {
                     this.feeder.getItems().get(0).decrement(1);
                     this.mob.lovePlayer(null);
-                    this.feeder = null;
                 }
             }
+            this.feeder = null;
         }
         super.tick();
     }

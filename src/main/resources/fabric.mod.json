@@ -2,14 +2,14 @@
     "schemaVersion": 1,
     "id": "animal_feeding_trough",
     "version": "${version}",
-    "name": "Animal Self Feed",
+    "name": "Animal Feeding Trough",
     "description": "-",
     "authors": [
         "Slexom"
     ],
     "contact": {
-        "homepage": "https://github.com/Slexom/animal-self-feed",
-        "sources": "https://github.com/Slexom/animal-self-feed"
+        "homepage": "https://github.com/Slexom/animal-feeding-trough",
+        "sources": "https://github.com/Slexom/animal-feeding-trough"
     },
     "license": "CC0-1.0",
     "icon": "assets/animal_feeding_trough/icon.png",

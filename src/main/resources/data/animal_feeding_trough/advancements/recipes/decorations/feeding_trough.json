@@ -1,0 +1,32 @@
+{
+    "parent": "minecraft:recipes/root",
+    "rewards": {
+        "recipes": [
+            "animal_feeding_trough:feeding_trough"
+        ]
+    },
+    "criteria": {
+        "has_wood_slab": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "tag": "minecraft:wooden_slabs"
+                    }
+                ]
+            }
+        },
+        "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+                "recipe": "animal_feeding_trough:feeding_trough"
+            }
+        }
+    },
+    "requirements": [
+        [
+            "has_wood_slab",
+            "has_the_recipe"
+        ]
+    ]
+}
