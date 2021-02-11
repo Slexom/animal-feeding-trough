@@ -2,7 +2,7 @@
     "multipart": [
         {
             "apply": {
-                "model": "animal_self_feed:block/food_container"
+                "model": "animal_feeding_trough:block/feeding_trough"
             }
         },
         {
@@ -10,7 +10,7 @@
                 "level": "1"
             },
             "apply": {
-                "model": "animal_self_feed:block/food_container_content_1"
+                "model": "animal_feeding_trough:block/feeding_trough_content_1"
             }
         },
         {
@@ -18,7 +18,7 @@
                 "level": "2"
             },
             "apply": {
-                "model": "animal_self_feed:block/food_container_content_2"
+                "model": "animal_feeding_trough:block/feeding_trough_content_2"
             }
         },
         {
@@ -26,7 +26,7 @@
                 "level": "3"
             },
             "apply": {
-                "model": "animal_self_feed:block/food_container_content_3"
+                "model": "animal_feeding_trough:block/feeding_trough_content_3"
             }
         },
         {
@@ -34,7 +34,7 @@
                 "level": "4"
             },
             "apply": {
-                "model": "animal_self_feed:block/food_container_content_4"
+                "model": "animal_feeding_trough:block/feeding_trough_content_4"
             }
         }
     ]

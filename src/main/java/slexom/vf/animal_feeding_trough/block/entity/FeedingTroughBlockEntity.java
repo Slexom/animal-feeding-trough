@@ -1,4 +1,4 @@
-package slexom.vf.animal_self_feed.block.entity;
+package slexom.vf.animal_feeding_trough.block.entity;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -17,20 +17,20 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import slexom.vf.animal_self_feed.AnimalSelfFeedMod;
-import slexom.vf.animal_self_feed.block.FoodContainerBlock;
-import slexom.vf.animal_self_feed.inventory.BlockEntityInventory;
-import slexom.vf.animal_self_feed.screen.FoodContainerScreenHandler;
+import slexom.vf.animal_feeding_trough.AnimalFeedingTroughMod;
+import slexom.vf.animal_feeding_trough.block.FeedingTroughBlock;
+import slexom.vf.animal_feeding_trough.inventory.BlockEntityInventory;
+import slexom.vf.animal_feeding_trough.screen.FeedingTroughScreenHandler;
 
-public class FoodContainerBlockEntity extends BlockEntity implements NamedScreenHandlerFactory, BlockEntityInventory, Tickable {
+public class FeedingTroughBlockEntity extends BlockEntity implements NamedScreenHandlerFactory, BlockEntityInventory, Tickable {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
 
-    public FoodContainerBlockEntity(BlockEntityType<?> blockEntityType) {
+    public FeedingTroughBlockEntity(BlockEntityType<?> blockEntityType) {
         super(blockEntityType);
     }
 
-    public FoodContainerBlockEntity() {
-        this(AnimalSelfFeedMod.FOOD_CONTAINER_BLOCK_ENTITY);
+    public FeedingTroughBlockEntity() {
+        this(AnimalFeedingTroughMod.FEEDING_TROUGH_BLOCK_ENTITY);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class FoodContainerBlockEntity extends BlockEntity implements NamedScreen
     @Nullable
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
-        return new FoodContainerScreenHandler(syncId, playerInventory, this);
+        return new FeedingTroughScreenHandler(syncId, playerInventory, this);
     }
 
     @Override
@@ -73,9 +73,9 @@ public class FoodContainerBlockEntity extends BlockEntity implements NamedScreen
                 newLevel = MathHelper.floor(this.getStack(0).getCount() / 16.0F) + 1;
                 newLevel = Math.min(newLevel, 4);
             }
-            int currentLevel = state.get(FoodContainerBlock.LEVEL);
+            int currentLevel = state.get(FeedingTroughBlock.LEVEL);
             if (currentLevel != newLevel) {
-                BlockState blockState = state.with(FoodContainerBlock.LEVEL, newLevel);
+                BlockState blockState = state.with(FeedingTroughBlock.LEVEL, newLevel);
                 world.setBlockState(this.pos, blockState, 3);
             }
         }

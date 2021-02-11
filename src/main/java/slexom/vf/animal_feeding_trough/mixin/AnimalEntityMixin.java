@@ -1,4 +1,4 @@
-package slexom.vf.animal_self_feed.mixin;
+package slexom.vf.animal_feeding_trough.mixin;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.GoalSelector;
@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import slexom.vf.animal_self_feed.ai.goal.SelfFeedGoal;
+import slexom.vf.animal_feeding_trough.ai.goal.SelfFeedGoal;
 
 @Mixin(MobEntity.class)
 public class AnimalEntityMixin {

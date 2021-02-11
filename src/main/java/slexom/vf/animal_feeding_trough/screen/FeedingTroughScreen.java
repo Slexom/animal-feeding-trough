@@ -1,4 +1,4 @@
-package slexom.vf.animal_self_feed.screen;
+package slexom.vf.animal_feeding_trough.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
@@ -7,13 +7,13 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import slexom.vf.animal_self_feed.AnimalSelfFeedMod;
+import slexom.vf.animal_feeding_trough.AnimalFeedingTroughMod;
 
-public class FoodContainerScreen extends HandledScreen<ScreenHandler> {
+public class FeedingTroughScreen extends HandledScreen<ScreenHandler> {
 
-    private static final Identifier TEXTURE = new Identifier(AnimalSelfFeedMod.MOD_ID, "textures/gui/container/food_container.png");
+    private static final Identifier TEXTURE = new Identifier(AnimalFeedingTroughMod.MOD_ID, "textures/gui/container/feeding_trough.png");
 
-    public FoodContainerScreen(ScreenHandler handler, PlayerInventory inventory, Text title) {
+    public FeedingTroughScreen(ScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
     }
 

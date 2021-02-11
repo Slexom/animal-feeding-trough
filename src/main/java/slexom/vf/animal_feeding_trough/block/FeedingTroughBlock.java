@@ -1,4 +1,4 @@
-package slexom.vf.animal_self_feed.block;
+package slexom.vf.animal_feeding_trough.block;
 
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -10,22 +10,19 @@ import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
-import net.minecraft.util.Util;
-import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import slexom.vf.animal_self_feed.block.entity.FoodContainerBlockEntity;
+import slexom.vf.animal_feeding_trough.block.entity.FeedingTroughBlockEntity;
 
-public class FoodContainerBlock extends BlockWithEntity {
+public class FeedingTroughBlock extends BlockWithEntity {
     public static final IntProperty LEVEL = IntProperty.of("level", 0, 4);
     private static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 9.0D, 16.0D);
 
-    public FoodContainerBlock(Settings settings) {
+    public FeedingTroughBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(LEVEL, 0));
     }
@@ -42,7 +39,7 @@ public class FoodContainerBlock extends BlockWithEntity {
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockView world) {
-        return new FoodContainerBlockEntity();
+        return new FeedingTroughBlockEntity();
     }
 
     @Override
@@ -64,8 +61,8 @@ public class FoodContainerBlock extends BlockWithEntity {
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof FoodContainerBlockEntity) {
-                ItemScatterer.spawn(world, pos, (FoodContainerBlockEntity) blockEntity);
+            if (blockEntity instanceof FeedingTroughBlockEntity) {
+                ItemScatterer.spawn(world, pos, (FeedingTroughBlockEntity) blockEntity);
                 world.updateComparators(pos, this);
             }
             super.onStateReplaced(state, world, pos, newState, moved);

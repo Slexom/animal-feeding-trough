@@ -1,4 +1,4 @@
-package slexom.vf.animal_self_feed.mixin;
+package slexom.vf.animal_feeding_trough.mixin;
 
 import net.minecraft.entity.ai.goal.GoalSelector;
 import net.minecraft.entity.ai.goal.PrioritizedGoal;

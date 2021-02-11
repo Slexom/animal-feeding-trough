@@ -1,4 +1,4 @@
-package slexom.vf.animal_self_feed.inventory;
+package slexom.vf.animal_feeding_trough.inventory;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;

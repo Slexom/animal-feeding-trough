@@ -1,6 +1,6 @@
 {
     "schemaVersion": 1,
-    "id": "animal_self_feed",
+    "id": "animal_feeding_trough",
     "version": "${version}",
     "name": "Animal Self Feed",
     "description": "-",
@@ -12,18 +12,18 @@
         "sources": "https://github.com/Slexom/animal-self-feed"
     },
     "license": "CC0-1.0",
-    "icon": "assets/animal_self_feed/icon.png",
+    "icon": "assets/animal_feeding_trough/icon.png",
     "environment": "*",
     "entrypoints": {
         "main": [
-            "slexom.vf.animal_self_feed.AnimalSelfFeedMod"
+            "slexom.vf.animal_feeding_trough.AnimalFeedingTroughMod"
         ],
         "client": [
-            "slexom.vf.animal_self_feed.AnimalSelfFeedClientMod"
+            "slexom.vf.animal_feeding_trough.AnimalFeedingTroughClientMod"
         ]
     },
     "mixins": [
-        "animal_self_feed.mixins.json"
+        "animal_feeding_trough.mixins.json"
     ],
     "depends": {
         "fabricloader": ">=0.7.4",

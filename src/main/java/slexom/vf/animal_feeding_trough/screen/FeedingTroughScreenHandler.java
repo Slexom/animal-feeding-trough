@@ -1,4 +1,4 @@
-package slexom.vf.animal_self_feed.screen;
+package slexom.vf.animal_feeding_trough.screen;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -7,17 +7,17 @@ import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
-import slexom.vf.animal_self_feed.AnimalSelfFeedMod;
+import slexom.vf.animal_feeding_trough.AnimalFeedingTroughMod;
 
-public class FoodContainerScreenHandler extends ScreenHandler {
+public class FeedingTroughScreenHandler extends ScreenHandler {
     private final Inventory inventory;
 
-    public FoodContainerScreenHandler(int syncId, PlayerInventory playerInventory) {
+    public FeedingTroughScreenHandler(int syncId, PlayerInventory playerInventory) {
         this(syncId, playerInventory, new SimpleInventory(1));
     }
 
-    public FoodContainerScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory) {
-        super(AnimalSelfFeedMod.FOOD_CONTAINER_SCREEN_HANDLER, syncId);
+    public FeedingTroughScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory) {
+        super(AnimalFeedingTroughMod.FEEDING_TROUGH_SCREEN_HANDLER, syncId);
         checkSize(inventory, 1);
         this.inventory = inventory;
         inventory.onOpen(playerInventory.player);

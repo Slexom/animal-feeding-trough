@@ -1,4 +1,4 @@
-package slexom.vf.animal_self_feed.ai.goal;
+package slexom.vf.animal_feeding_trough.ai.goal;
 
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.ai.goal.Goal;
@@ -11,7 +11,7 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
-import slexom.vf.animal_self_feed.block.entity.FoodContainerBlockEntity;
+import slexom.vf.animal_feeding_trough.block.entity.FeedingTroughBlockEntity;
 
 import java.util.EnumSet;
 
@@ -20,7 +20,7 @@ public class SelfFeedGoal extends MoveToTargetPosGoal {
     protected final AnimalEntity mob;
     private final Ingredient food;
 
-    private FoodContainerBlockEntity feeder;
+    private FeedingTroughBlockEntity feeder;
 
     public SelfFeedGoal(AnimalEntity mob, double speed, Ingredient food) {
         super(mob, speed, 8);
@@ -49,12 +49,12 @@ public class SelfFeedGoal extends MoveToTargetPosGoal {
     @Override
     protected boolean isTargetPos(WorldView world, BlockPos pos) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof FoodContainerBlockEntity) {
-            FoodContainerBlockEntity foodContainerBlockEntity = (FoodContainerBlockEntity) blockEntity;
-            ItemStack itemStack = foodContainerBlockEntity.getItems().get(0);
+        if (blockEntity instanceof FeedingTroughBlockEntity) {
+            FeedingTroughBlockEntity feedingTroughBlockEntity = (FeedingTroughBlockEntity) blockEntity;
+            ItemStack itemStack = feedingTroughBlockEntity.getItems().get(0);
             boolean hasCorrectFood = this.food.test(itemStack);
             if (hasCorrectFood) {
-                this.feeder = foodContainerBlockEntity;
+                this.feeder = feedingTroughBlockEntity;
                 return true;
             }
         }
