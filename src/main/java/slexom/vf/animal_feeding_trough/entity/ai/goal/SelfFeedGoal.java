@@ -1,4 +1,4 @@
-package slexom.vf.animal_feeding_trough.ai.goal;
+package slexom.vf.animal_feeding_trough.entity.ai.goal;
 
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.ai.goal.MoveToTargetPosGoal;
