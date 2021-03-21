@@ -2,6 +2,9 @@ package slexom.vf.animal_feeding_trough.block;
 
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.block.entity.BrewingStandBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
@@ -16,6 +19,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import slexom.vf.animal_feeding_trough.AnimalFeedingTroughMod;
 import slexom.vf.animal_feeding_trough.block.entity.FeedingTroughBlockEntity;
 
 public class FeedingTroughBlock extends BlockWithEntity {
@@ -34,12 +38,6 @@ public class FeedingTroughBlock extends BlockWithEntity {
 
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return SHAPE;
-    }
-
-    @Nullable
-    @Override
-    public BlockEntity createBlockEntity(BlockView world) {
-        return new FeedingTroughBlockEntity();
     }
 
     @Override
@@ -77,6 +75,18 @@ public class FeedingTroughBlock extends BlockWithEntity {
     @Override
     public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
         return ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos));
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        return new FeedingTroughBlockEntity(pos,state);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        return world.isClient ? null : checkType(type, AnimalFeedingTroughMod.FEEDING_TROUGH_BLOCK_ENTITY, FeedingTroughBlockEntity::tick);
     }
 
 }

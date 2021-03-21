@@ -21,15 +21,13 @@ import slexom.vf.animal_feeding_trough.screen.FeedingTroughScreenHandler;
 
 public class AnimalFeedingTroughMod implements ModInitializer {
 
-    public static final String MOD_ID = "animal_feeding_trough";
     public static final Logger LOGGER = LogManager.getLogger("Animal Feeding Trough");
-
-    public final Identifier REGISTRY_NAME = new Identifier(AnimalFeedingTroughMod.MOD_ID, "feeding_trough");
-
+    public static final String MOD_ID = "animal_feeding_trough";
     public static Block FEEDING_TROUGH_BLOCK;
     public static BlockEntityType<FeedingTroughBlockEntity> FEEDING_TROUGH_BLOCK_ENTITY;
     public static BlockItem FEEDING_TROUGH_BLOCK_ITEM;
     public static ScreenHandlerType<FeedingTroughScreenHandler> FEEDING_TROUGH_SCREEN_HANDLER;
+    public final Identifier REGISTRY_NAME = new Identifier(AnimalFeedingTroughMod.MOD_ID, "feeding_trough");
 
     @Override
     public void onInitialize() {
