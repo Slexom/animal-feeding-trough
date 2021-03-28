@@ -21,7 +21,7 @@ public class FeedingTroughScreenHandler extends ScreenHandler {
         checkSize(inventory, 1);
         this.inventory = inventory;
         inventory.onOpen(playerInventory.player);
-        this.addSlot(new Slot(inventory, 0, 80, 25));
+        this.addSlot(new Slot(inventory, 0, 80, 26));
         this.drawPlayerInventory(playerInventory);
         this.drawHotbar(playerInventory);
     }
