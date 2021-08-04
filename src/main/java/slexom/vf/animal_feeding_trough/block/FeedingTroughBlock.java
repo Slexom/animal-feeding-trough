@@ -4,7 +4,6 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.block.entity.BrewingStandBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
@@ -47,9 +46,16 @@ public class FeedingTroughBlock extends BlockWithEntity {
 
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
-            NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
-            if (screenHandlerFactory != null) {
-                player.openHandledScreen(screenHandlerFactory);
+            if (player.isSneaking() && player.getStackInHand(hand).isEmpty()) {
+                BlockEntity blockEntity = world.getBlockEntity(pos);
+                if (blockEntity instanceof FeedingTroughBlockEntity be) {
+                    be.dropStoredXp(world, player);
+                }
+            } else {
+                NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
+                if (screenHandlerFactory != null) {
+                    player.openHandledScreen(screenHandlerFactory);
+                }
             }
         }
         return ActionResult.SUCCESS;
@@ -86,7 +92,10 @@ public class FeedingTroughBlock extends BlockWithEntity {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return world.isClient ? null : checkType(type, AnimalFeedingTroughMod.FEEDING_TROUGH_BLOCK_ENTITY, FeedingTroughBlockEntity::tick);
+        return world.isClient ? null : checkType(type, AnimalFeedingTroughMod.FEEDING_TROUGH_BLOCK_ENTITY, (world1, pos, state1, blockEntity) -> {
+            FeedingTroughBlockEntity.tick(world, pos, state1, blockEntity);
+            blockEntity.lookupExperienceOrbs(world, pos);
+        });
     }
 
 }
