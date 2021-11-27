@@ -68,10 +68,9 @@ public class FeedingTroughBlockEntity extends BlockEntity implements NamedScreen
     }
 
     @Override
-    public NbtCompound writeNbt(NbtCompound tag) {
+    public void writeNbt(NbtCompound tag) {
         super.writeNbt(tag);
         Inventories.writeNbt(tag, this.inventory);
-        return tag;
-    }
+     }
 
 }

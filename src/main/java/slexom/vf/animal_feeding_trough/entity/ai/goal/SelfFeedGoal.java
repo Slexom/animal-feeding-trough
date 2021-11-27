@@ -61,7 +61,7 @@ public class SelfFeedGoal extends MoveToTargetPosGoal {
         World world = this.mob.world;
         if (!world.isClient && this.feeder != null && this.mob.canEat()) {
             if (!this.feeder.getItems().get(0).isEmpty()) {
-                this.mob.getLookControl().lookAt((double) this.targetPos.getX() + 0.5D, this.targetPos.getY(), (double) this.targetPos.getZ() + 0.5D, 10.0F, (float) this.mob.getLookPitchSpeed());
+                this.mob.getLookControl().lookAt((double) this.targetPos.getX() + 0.5D, this.targetPos.getY(), (double) this.targetPos.getZ() + 0.5D, 10.0F, (float) this.mob.getMaxLookPitchChange());
                 if (this.hasReached()) {
                     this.feeder.getItems().get(0).decrement(1);
                     this.mob.lovePlayer(null);
