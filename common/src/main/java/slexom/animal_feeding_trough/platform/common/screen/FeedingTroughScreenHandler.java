@@ -17,8 +17,8 @@ public class FeedingTroughScreenHandler extends ScreenHandler {
     }
 
     public FeedingTroughScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory) {
-        //super(AnimalFeedingTroughMod.FEEDING_TROUGH_SCREEN_HANDLER.get(), syncId);
-        super(AnimalFeedingTroughMod.FEEDING_TROUGH_SCREEN_HANDLER, syncId);
+       super(AnimalFeedingTroughMod.FEEDING_TROUGH_SCREEN_HANDLER.get(), syncId);
+        //  super(AnimalFeedingTroughMod.FEEDING_TROUGH_SCREEN_HANDLER, syncId);
         checkSize(inventory, 1);
         this.inventory = inventory;
         inventory.onOpen(playerInventory.player);

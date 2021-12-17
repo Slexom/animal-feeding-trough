@@ -25,8 +25,8 @@ public class FeedingTroughBlockEntity extends BlockEntity implements NamedScreen
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
 
     public FeedingTroughBlockEntity(BlockPos pos, BlockState state) {
-        // super(AnimalFeedingTroughMod.FEEDING_TROUGH_BLOCK_ENTITY.get(), pos, state);
-        super(AnimalFeedingTroughMod.FEEDING_TROUGH_BLOCK_ENTITY, pos, state);
+     super(AnimalFeedingTroughMod.FEEDING_TROUGH_BLOCK_ENTITY.get(), pos, state);
+        //   super(AnimalFeedingTroughMod.FEEDING_TROUGH_BLOCK_ENTITY, pos, state);
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, FeedingTroughBlockEntity blockEntity) {
