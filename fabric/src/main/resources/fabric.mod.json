@@ -1,0 +1,35 @@
+{
+    "schemaVersion": 1,
+    "id": "animal_feeding_trough",
+    "version": "${version}",
+    "name": "Animal Feeding Trough",
+    "description": "-",
+    "authors": [
+        "Slexom"
+    ],
+    "contact": {
+        "homepage": "https://github.com/Slexom/animal-feeding-trough",
+        "sources": "https://github.com/Slexom/animal-feeding-trough"
+    },
+    "license": "CC0-1.0",
+    "icon": "assets/animal_feeding_trough/icon.png",
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "slexom.animal_feeding_trough.platform.fabric.AnimalFeedingTroughModFabric"
+        ],
+        "client": [
+            "slexom.animal_feeding_trough.platform.fabric.AnimalFeedingTroughClientModFabric"
+        ]
+    },
+    "mixins": [
+        "mixins.animal_feeding_trough.json"
+    ],
+    "depends": {
+        "fabricloader": ">=0.11.3",
+        "fabric": "*",
+        "minecraft": "1.18.x",
+        "java": ">=16"
+    },
+    "accessWidener": "animal_feeding_trough.accesswidener"
+}

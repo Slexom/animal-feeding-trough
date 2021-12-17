@@ -1,0 +1,16 @@
+{
+    "required": true,
+    "minVersion": "0.8",
+    "package": "slexom.animal_feeding_trough.platform.common.mixin",
+    "compatibilityLevel": "JAVA_16",
+    "mixins": [
+        "AnimalEntityMixin",
+        "GoalSelectorAccessor",
+        "TemptGoalAccessor"
+    ],
+    "client": [
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}
