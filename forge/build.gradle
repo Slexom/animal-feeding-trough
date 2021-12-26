@@ -7,6 +7,8 @@ architectury {
     forge()
 }
 
+version = "${rootProject.mod_version}+${rootProject.minecraft_version}-forge"
+
 loom {
     accessWidenerPath.set(project(":common").file("src/main/resources/animal_feeding_trough.accesswidener"))
 
