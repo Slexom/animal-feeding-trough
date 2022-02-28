@@ -13,15 +13,15 @@ import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import slexom.vf.animal_feeding_trough.block.FeedingTroughBlock;
 import slexom.vf.animal_feeding_trough.block.entity.FeedingTroughBlockEntity;
 import slexom.vf.animal_feeding_trough.screen.FeedingTroughScreenHandler;
 
 public class AnimalFeedingTroughMod implements ModInitializer {
 
-    public static final Logger LOGGER = LogManager.getLogger("Animal Feeding Trough");
+    public static final Logger LOGGER = LoggerFactory.getLogger("Animal Feeding Trough");
     public static final String MOD_ID = "animal_feeding_trough";
     public static Block FEEDING_TROUGH_BLOCK;
     public static BlockEntityType<FeedingTroughBlockEntity> FEEDING_TROUGH_BLOCK_ENTITY;
