@@ -34,7 +34,7 @@ public class AnimalEntityMixin extends MobEntity {
                     .getGoals()
                     .stream()
                     .filter(prioritizedGoal -> prioritizedGoal.getGoal().getClass().equals(TemptGoal.class))
-                    .collect(Collectors.toList())
+                    .toList()
                     .forEach(prioritizedGoal -> {
                         TemptGoal goal = (TemptGoal) prioritizedGoal.getGoal();
                         PathAwareEntity mob = ((TemptGoalAccessor) goal).getMob();

@@ -2,7 +2,6 @@ package slexom.vf.animal_feeding_trough;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
@@ -31,7 +30,7 @@ public class AnimalFeedingTroughMod implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        FEEDING_TROUGH_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(REGISTRY_NAME, FeedingTroughScreenHandler::new);
+        FEEDING_TROUGH_SCREEN_HANDLER = Registry.register(Registry.SCREEN_HANDLER, REGISTRY_NAME, new ScreenHandlerType<>(FeedingTroughScreenHandler::new));
         FEEDING_TROUGH_BLOCK = Registry.register(Registry.BLOCK, REGISTRY_NAME, new FeedingTroughBlock(AbstractBlock.Settings.of(Material.WOOD).sounds(BlockSoundGroup.WOOD).strength(0.2F).nonOpaque()));
         FEEDING_TROUGH_BLOCK_ITEM = Registry.register(Registry.ITEM, REGISTRY_NAME, new BlockItem(FEEDING_TROUGH_BLOCK, new FabricItemSettings().group(ItemGroup.MISC)));
         FEEDING_TROUGH_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, REGISTRY_NAME, BlockEntityType.Builder.create(FeedingTroughBlockEntity::new, FEEDING_TROUGH_BLOCK).build(null));
