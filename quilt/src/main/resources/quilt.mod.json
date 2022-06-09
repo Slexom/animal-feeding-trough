@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "quilt_loader": {
+    "group": "${group}",    "id": "animal_feeding_trough",
+    "version": "${version}",
+    "name": "Animal Feeding Trough",
+    "description": "-",
+    "authors": [
+      "Slexom"
+    ],
+    "contact": {
+      "homepage": "https://github.com/Slexom/animal-feeding-trough",
+      "sources": "https://github.com/Slexom/animal-feeding-trough"
+    },
+    "license": "CC0-1.0",
+    "icon": "assets/animal_feeding_trough/icon.png",
+    "intermediate_mappings": "net.fabricmc:intermediary",
+    "environment": "*",
+    "entrypoints": {
+      "init": [
+        "slexom.animal_feeding_trough.platform.quilt.AnimalFeedingTroughModQuilt"
+      ],
+      "client": [
+        "slexom.animal_feeding_trough.platform.quilt.AnimalFeedingTroughClientModQuilt"
+      ]
+    },
+    "mixins": [
+      "mixins.animal_feeding_trough.json"
+    ],
+    "depends": [
+      {
+        "id": "quilt_loader",
+        "version": "*"
+      },
+      {
+        "id": "quilt_base",
+        "version": "*"
+      },
+      {
+        "id": "minecraft",
+        "version": ">=1.19.x"
+      },
+      {
+        "id": "architectury",
+        "version": ">=5.5.18"
+      }
+    ]
+  }
+}

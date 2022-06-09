@@ -10,5 +10,6 @@ pluginManagement {
 include("common")
 include("fabric")
 include("forge")
+include("quilt")
 
 rootProject.name = "animal_feeding_trough"
