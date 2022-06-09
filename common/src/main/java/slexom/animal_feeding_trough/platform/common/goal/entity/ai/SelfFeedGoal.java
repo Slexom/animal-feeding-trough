@@ -34,7 +34,7 @@ public class SelfFeedGoal extends MoveToTargetPosGoal {
     }
 
     @Override
-    public double getDesiredSquaredDistanceToTarget() {
+    public double getDesiredDistanceToTarget() {
         return 2.0D;
     }
 
@@ -45,8 +45,7 @@ public class SelfFeedGoal extends MoveToTargetPosGoal {
     @Override
     protected boolean isTargetPos(WorldView world, BlockPos pos) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof FeedingTroughBlockEntity) {
-            FeedingTroughBlockEntity feedingTroughBlockEntity = (FeedingTroughBlockEntity) blockEntity;
+        if (blockEntity instanceof FeedingTroughBlockEntity feedingTroughBlockEntity) {
             ItemStack itemStack = feedingTroughBlockEntity.getItems().get(0);
             if (!itemStack.isEmpty() && hasCorrectFood(itemStack)) {
                 this.feeder = feedingTroughBlockEntity;

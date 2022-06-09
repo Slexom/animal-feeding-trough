@@ -1,5 +1,6 @@
 package slexom.animal_feeding_trough.platform.common;
 
+import com.google.common.base.Suppliers;
 import dev.architectury.registry.menu.MenuRegistry;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.Registrar;
@@ -25,12 +26,14 @@ import slexom.animal_feeding_trough.platform.common.block.entity.FeedingTroughBl
 import slexom.animal_feeding_trough.platform.common.screen.FeedingTroughScreen;
 import slexom.animal_feeding_trough.platform.common.screen.FeedingTroughScreenHandler;
 
+import java.util.function.Supplier;
+
 public class AnimalFeedingTroughMod {
 
     public static final Logger LOGGER = LogManager.getLogger("Animal Feeding Trough");
     public static final String MOD_ID = "animal_feeding_trough";
 
-    public static final Lazy<Registries> REGISTRIES = new Lazy<>(() -> Registries.get(MOD_ID));
+    public static final Supplier<Registries> REGISTRIES = Suppliers.memoize(() -> Registries.get(MOD_ID));
 
     public static final Registrar<Block> BLOCK_REGISTRAR = REGISTRIES.get().get(Registry.BLOCK_KEY);
     public static final Registrar<Item> ITEM_REGISTRAR = REGISTRIES.get().get(Registry.ITEM_KEY);
@@ -39,7 +42,7 @@ public class AnimalFeedingTroughMod {
 
     public static final Identifier REGISTRY_NAME = new Identifier(AnimalFeedingTroughMod.MOD_ID, "feeding_trough");
 
-    public static RegistrySupplier<ScreenHandlerType<FeedingTroughScreenHandler>> FEEDING_TROUGH_SCREEN_HANDLER = SCREEN_HANDLER_TYPE_REGISTRAR.register(REGISTRY_NAME, () -> MenuRegistry.of(FeedingTroughScreenHandler::new));
+    public static RegistrySupplier<ScreenHandlerType<FeedingTroughScreenHandler>> FEEDING_TROUGH_SCREEN_HANDLER = SCREEN_HANDLER_TYPE_REGISTRAR.register(REGISTRY_NAME, () -> new ScreenHandlerType<FeedingTroughScreenHandler>(FeedingTroughScreenHandler::new));
     public static RegistrySupplier<Block> FEEDING_TROUGH_BLOCK = BLOCK_REGISTRAR.register(REGISTRY_NAME, () -> new FeedingTroughBlock(AbstractBlock.Settings.of(Material.WOOD).sounds(BlockSoundGroup.WOOD).strength(0.2F).nonOpaque()));
     public static RegistrySupplier<BlockItem> FEEDING_TROUGH_BLOCK_ITEM = ITEM_REGISTRAR.register(REGISTRY_NAME, () -> new BlockItem(FEEDING_TROUGH_BLOCK.get(), new Item.Settings().group(ItemGroup.MISC)));
     public static RegistrySupplier<BlockEntityType<FeedingTroughBlockEntity>> FEEDING_TROUGH_BLOCK_ENTITY = BLOCK_ENTITY_TYPE_REGISTRAR.register(REGISTRY_NAME, () -> BlockEntityType.Builder.create(FeedingTroughBlockEntity::new, FEEDING_TROUGH_BLOCK.get()).build(null));
