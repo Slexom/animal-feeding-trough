@@ -39,6 +39,8 @@ dependencies {
     //  shadowCommon(project(path: ":fabric-like", configuration: "transformProductionQuilt")) { transitive false }
 }
 
+version = "${rootProject.mod_version}+${rootProject.minecraft_version}-quilt"
+
 processResources {
     inputs.property "group", rootProject.maven_group
     inputs.property "version", project.version
@@ -78,7 +80,7 @@ components.java {
         skip()
     }
 }
-
+/*
 publishing {
     publications {
         mavenQuilt(MavenPublication) {
@@ -92,3 +94,4 @@ publishing {
         // Add repositories to publish to here.
     }
 }
+*/

@@ -1,7 +1,11 @@
 {
   "schema_version": 1,
+  "mixin": [
+    "mixins.animal_feeding_trough.json"
+  ],
   "quilt_loader": {
-    "group": "${group}",    "id": "animal_feeding_trough",
+    "group": "${group}",
+    "id": "animal_feeding_trough",
     "version": "${version}",
     "name": "Animal Feeding Trough",
     "description": "-",
@@ -20,13 +24,10 @@
       "init": [
         "slexom.animal_feeding_trough.platform.quilt.AnimalFeedingTroughModQuilt"
       ],
-      "client": [
+      "client_init": [
         "slexom.animal_feeding_trough.platform.quilt.AnimalFeedingTroughClientModQuilt"
       ]
     },
-    "mixins": [
-      "mixins.animal_feeding_trough.json"
-    ],
     "depends": [
       {
         "id": "quilt_loader",
