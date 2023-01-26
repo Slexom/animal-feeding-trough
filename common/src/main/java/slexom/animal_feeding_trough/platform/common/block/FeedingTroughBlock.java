@@ -46,9 +46,16 @@ public class FeedingTroughBlock extends BlockWithEntity {
 
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
-            NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
-            if (screenHandlerFactory != null) {
-                player.openHandledScreen(screenHandlerFactory);
+            if (player.isSneaking() && player.getStackInHand(hand).isEmpty()) {
+                BlockEntity blockEntity = world.getBlockEntity(pos);
+                if (blockEntity instanceof FeedingTroughBlockEntity feedingTroughBlockEntity) {
+                    feedingTroughBlockEntity.dropStoredXp(world, player);
+                }
+            } else {
+                NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
+                if (screenHandlerFactory != null) {
+                    player.openHandledScreen(screenHandlerFactory);
+                }
             }
         }
         return ActionResult.SUCCESS;
@@ -79,14 +86,19 @@ public class FeedingTroughBlock extends BlockWithEntity {
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new FeedingTroughBlockEntity(pos,state);
+        return new FeedingTroughBlockEntity(pos, state);
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return world.isClient ? null : checkType(type, AnimalFeedingTroughMod.FEEDING_TROUGH_BLOCK_ENTITY.get(), FeedingTroughBlockEntity::tick);
-        //return world.isClient ? null : checkType(type, AnimalFeedingTroughMod.FEEDING_TROUGH_BLOCK_ENTITY, FeedingTroughBlockEntity::tick);
+        if (world.isClient) {
+            return null;
+        }
+        return checkType(type, AnimalFeedingTroughMod.FEEDING_TROUGH_BLOCK_ENTITY.get(), (World wld, BlockPos pos, BlockState st, FeedingTroughBlockEntity blockEntity) -> {
+            FeedingTroughBlockEntity.tick(wld, pos, st, blockEntity);
+            blockEntity.gatherExperienceOrbs(wld, pos);
+        });
     }
 
 }
