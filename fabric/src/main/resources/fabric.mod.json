@@ -30,6 +30,6 @@
         "fabric": "*",
         "minecraft": "1.19.x",
         "java": ">=16"
-    },
-    "accessWidener": "animal_feeding_trough.accesswidener"
+    }
+
 }
