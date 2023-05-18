@@ -57,7 +57,7 @@ public class SelfFeedGoal extends MoveToTargetPosGoal {
 
     @Override
     public void tick() {
-        World world = this.mob.world;
+        World world = this.mob.getWorld();
         if (!world.isClient && this.feeder != null && this.mob.canEat()) {
             if (!this.feeder.getItems().get(0).isEmpty()) {
                 this.mob.getLookControl().lookAt((double) this.targetPos.getX() + 0.5D, this.targetPos.getY(), (double) this.targetPos.getZ() + 0.5D, 10.0F, (float) this.mob.getMaxLookPitchChange());
