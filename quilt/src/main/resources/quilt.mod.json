@@ -7,19 +7,22 @@
     "group": "${group}",
     "id": "animal_feeding_trough",
     "version": "${version}",
-    "name": "Animal Feeding Trough",
-    "description": "-",
-    "authors": [
-      "Slexom"
-    ],
-    "contact": {
-      "homepage": "https://github.com/Slexom/animal-feeding-trough",
-      "sources": "https://github.com/Slexom/animal-feeding-trough"
+    "metadata": {
+      "name": "Animal Feeding Trough",
+      "description": "-",
+      "contributors": {
+        "Slexom": "Owner"
+      },
+      "contact": {
+        "homepage": "https://legacy.curseforge.com/minecraft/mc-mods/animal-feeding-trough",
+        "issues": "https://github.com/Slexom/animal-feeding-trough/issues",
+        "sources": "https://github.com/Slexom/animal-feeding-trough"
+      },
+      "icon": "assets/animal_feeding_trough/icon.png",
+      "license": "CC0-1.0"
     },
-    "license": "CC0-1.0",
-    "icon": "assets/animal_feeding_trough/icon.png",
+
     "intermediate_mappings": "net.fabricmc:intermediary",
-    "environment": "*",
     "entrypoints": {
       "init": [
         "slexom.animal_feeding_trough.platform.quilt.AnimalFeedingTroughModQuilt"
@@ -31,19 +34,19 @@
     "depends": [
       {
         "id": "quilt_loader",
-        "version": "*"
+        "versions": ">=0.18.10"
       },
       {
-        "id": "quilt_base",
-        "version": "*"
+        "id": "quilted_fabric_api",
+        "versions": ">=7.0.0"
       },
       {
         "id": "minecraft",
-        "version": ">=1.19.x"
+        "versions": ">=1.20"
       },
       {
         "id": "architectury",
-        "version": ">=5.12.44"
+        "version": ">=9.0.7"
       }
     ]
   }
