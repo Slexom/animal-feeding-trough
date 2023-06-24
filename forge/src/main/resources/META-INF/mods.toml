@@ -16,20 +16,20 @@ logoFile = "icon.png"
 [[dependencies.animal_feeding_trough]]
 modId = "forge"
 mandatory = true
-versionRange = "[46,)"
+versionRange = "[47,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.animal_feeding_trough]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.20,)"
+versionRange = "[1.20.1,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.animal_feeding_trough]]
 modId = "architectury"
 mandatory = true
-versionRange = "[9.0.7,)"
+versionRange = "[9.0.8,)"
 ordering = "AFTER"
 side = "BOTH"
