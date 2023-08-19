@@ -1,0 +1,26 @@
+{
+    "textures": {
+        "particle": "animal_feeding_trough:block/carrot",
+        "inside": "animal_feeding_trough:block/carrot"
+    },
+    "elements": [
+        {
+            "from": [
+                1,
+                1,
+                1
+            ],
+            "to": [
+                15,
+                2,
+                15
+            ],
+            "faces": {
+                "up": {
+                    "texture": "#inside",
+                    "cullface": "up"
+                }
+            }
+        }
+    ]
+}

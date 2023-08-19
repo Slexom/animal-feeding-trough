@@ -14,10 +14,12 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.resource.featuretoggle.FeatureFlags;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.biome.Biome;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import slexom.animal_feeding_trough.platform.common.block.FeedingTroughBlock;
@@ -42,6 +44,15 @@ public class AnimalFeedingTroughMod {
     public static final Identifier REGISTRY_NAME = new Identifier(AnimalFeedingTroughMod.MOD_ID, "feeding_trough");
     public static RegistrySupplier<Block> FEEDING_TROUGH_BLOCK = BLOCK_REGISTRAR.register(REGISTRY_NAME, () -> new FeedingTroughBlock(AbstractBlock.Settings.create().mapColor(MapColor.OAK_TAN).instrument(Instrument.BASS).strength(0.2f).sounds(BlockSoundGroup.WOOD).burnable().nonOpaque()));
     public static RegistrySupplier<BlockItem> FEEDING_TROUGH_BLOCK_ITEM = ITEM_REGISTRAR.register(REGISTRY_NAME, () -> new BlockItem(FEEDING_TROUGH_BLOCK.get(), new Item.Settings().arch$tab(ItemGroups.TOOLS)));
+
+
+
+    public static final TagKey<Item> FEEDING_TROUGH_CONTENT_WHEAT_TAG = TagKey.of(RegistryKeys.ITEM, new Identifier(MOD_ID, "feeding_trough_content/wheat"));
+    public static final TagKey<Item> FEEDING_TROUGH_CONTENT_CARROT_TAG = TagKey.of(RegistryKeys.ITEM, new Identifier(MOD_ID, "feeding_trough_content/carrot"));
+    public static final TagKey<Item> FEEDING_TROUGH_CONTENT_POTATO_TAG = TagKey.of(RegistryKeys.ITEM, new Identifier(MOD_ID, "feeding_trough_content/potato"));
+    public static final TagKey<Item> FEEDING_TROUGH_CONTENT_MEAT_TAG = TagKey.of(RegistryKeys.ITEM, new Identifier(MOD_ID, "feeding_trough_content/meat"));
+
+
 
     public static void onInitialize() {
         LOGGER.info("[Animal Feeding Trough] Load Complete! Enjoy :D");
