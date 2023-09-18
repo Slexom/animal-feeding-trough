@@ -11,8 +11,8 @@ pluginManagement {
 
 include("common")
 include("fabric")
-include("forge")
-include("quilt")
-include("neoforge")
+// include("forge")
+// include("quilt")
+// include("neoforge")
 
 rootProject.name = "animal_feeding_trough"

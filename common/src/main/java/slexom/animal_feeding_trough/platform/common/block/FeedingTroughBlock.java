@@ -95,7 +95,7 @@ public class FeedingTroughBlock extends BlockWithEntity {
         if (world.isClient) {
             return null;
         }
-        return checkType(type, AnimalFeedingTroughMod.FEEDING_TROUGH_BLOCK_ENTITY.get(), (World wld, BlockPos pos, BlockState st, FeedingTroughBlockEntity blockEntity) -> {
+        return validateTicker(type, AnimalFeedingTroughMod.FEEDING_TROUGH_BLOCK_ENTITY.get(), (World wld, BlockPos pos, BlockState st, FeedingTroughBlockEntity blockEntity) -> {
             FeedingTroughBlockEntity.tick(wld, pos, st, blockEntity);
             blockEntity.gatherExperienceOrbs(wld, pos);
         });
