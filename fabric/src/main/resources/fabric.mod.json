@@ -26,9 +26,9 @@
         "mixins.animal_feeding_trough.json"
     ],
     "depends": {
-        "fabricloader": ">=0.14.22",
+        "fabricloader": ">=${loader_version}",
         "fabric": "*",
-        "minecraft": "1.20.2-beta.4",
+        "minecraft": "${mc_version}",
         "java": ">=17"
     }
 
