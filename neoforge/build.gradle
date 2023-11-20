@@ -4,18 +4,13 @@ plugins {
 
 architectury {
     platformSetupLoomIde()
-    forge()
+    neoForge()
 }
 
 version = "${rootProject.mod_version}+${rootProject.minecraft_version}-neoforge"
 
 loom {
     accessWidenerPath.set(project(":common").file("src/main/resources/animal_feeding_trough.accesswidener"))
-
-    forge {
-        convertAccessWideners.set(true)
-        mixinConfig "mixins.animal_feeding_trough.json"
-    }
 }
 
 configurations {
@@ -23,16 +18,16 @@ configurations {
     shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
     compileClasspath.extendsFrom common
     runtimeClasspath.extendsFrom common
-    developmentForge.extendsFrom common
+    developmentNeoForge.extendsFrom common
 }
 
 dependencies {
-    forge "net.neoforged:forge:${rootProject.minecraft_version}-${rootProject.neoforge_version}"
+    neoForge "net.neoforged:neoforge:${rootProject.neoforge_version}"
     // Remove the next line if you don't want to depend on the API
-    modApi "dev.architectury:architectury-forge:${rootProject.architectury_version}"
+    modApi "dev.architectury:architectury-neoforge:${rootProject.architectury_version}"
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
-    shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
+    shadowCommon(project(path: ":common", configuration: "transformProductionNeoForge")) { transitive = false }
 }
 
 processResources {
