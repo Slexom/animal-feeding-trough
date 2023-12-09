@@ -1,5 +1,6 @@
 package slexom.animal_feeding_trough.platform.common.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -24,12 +25,16 @@ import slexom.animal_feeding_trough.platform.common.block.entity.FeedingTroughBl
 public class FeedingTroughBlock extends BlockWithEntity {
     public static final IntProperty LEVEL = IntProperty.of("level", 0, 4);
     private static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 9.0D, 16.0D);
+    public static final MapCodec<FeedingTroughBlock> CODEC = createCodec(FeedingTroughBlock::new);
 
     public FeedingTroughBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(LEVEL, 0));
     }
 
+    public MapCodec<FeedingTroughBlock> getCodec() {
+        return CODEC;
+    }
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
         stateManager.add(LEVEL);

@@ -11,6 +11,7 @@ import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 
 @Mixin(AnimalEntity.class)
 public class AnimalEntityMixin extends MobEntity {
+    @Unique
     private static final ItemStack[] FORBIDDEN_ITEMS = Arrays.stream(new Item[]{Items.CARROT_ON_A_STICK, Items.WARPED_FUNGUS_ON_A_STICK}).map(ItemStack::new).toArray(ItemStack[]::new);
 
     protected AnimalEntityMixin(EntityType<? extends MobEntity> entityType, World world) {

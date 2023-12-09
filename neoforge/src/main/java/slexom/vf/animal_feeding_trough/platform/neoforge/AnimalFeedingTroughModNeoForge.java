@@ -1,4 +1,4 @@
-package slexom.vf.animal_feeding_trough.neoforge;
+package slexom.vf.animal_feeding_trough.platform.neoforge;
 
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.neoforged.api.distmarker.Dist;

@@ -1,4 +1,4 @@
-package slexom.vf.animal_feeding_trough.forge;
+package slexom.vf.animal_feeding_trough.platform.forge;
 
 import dev.architectury.platform.forge.EventBuses;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
