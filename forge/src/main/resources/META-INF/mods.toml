@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[46,)"
+loaderVersion = "*"
 issueTrackerURL = "https://github.com/Slexom/animal-feeding-trough/issues"
 license = "MIT"
 
@@ -16,20 +16,20 @@ logoFile = "icon.png"
 [[dependencies.animal_feeding_trough]]
 modId = "forge"
 mandatory = true
-versionRange = "[48,)"
+versionRange = "[${forgeVersion},)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.animal_feeding_trough]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.20.2,)"
+versionRange = "[${minecraftVersion},)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.animal_feeding_trough]]
 modId = "architectury"
 mandatory = true
-versionRange = "[10.0.8,)"
+versionRange = "[${architecturyVersion},)"
 ordering = "AFTER"
 side = "BOTH"
