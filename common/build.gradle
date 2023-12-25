@@ -6,6 +6,10 @@ dependencies {
     modApi "dev.architectury:architectury:${rootProject.architectury_version}"
 }
 
+loom {
+    accessWidenerPath = file("src/main/resources/animal_feeding_trough.accesswidener")
+}
+
 architectury {
     common(rootProject.enabled_platforms.split(","))
 }

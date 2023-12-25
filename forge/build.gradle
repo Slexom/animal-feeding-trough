@@ -10,10 +10,12 @@ architectury {
 version = "${rootProject.mod_version}+${rootProject.minecraft_version}-forge"
 
 loom {
-    accessWidenerPath.set(project(":common").file("src/main/resources/animal_feeding_trough.accesswidener"))
+    accessWidenerPath = project(":common").loom.accessWidenerPath
 
     forge {
-        convertAccessWideners.set(true)
+        convertAccessWideners = true
+        extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
+
         mixinConfig "mixins.animal_feeding_trough.json"
     }
 }
@@ -22,7 +24,7 @@ configurations {
     common
     shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
     compileClasspath.extendsFrom common
-    runtimeClasspath.extendsFrom common
+    // runtimeClasspath.extendsFrom common
     developmentForge.extendsFrom common
 }
 
@@ -43,9 +45,9 @@ processResources {
 
     filesMatching("META-INF/mods.toml") {
         expand "version": project.version,
-               "minecraftVersion": project.minecraft_version,
-               "architecturyVersion": project.architectury_version,
-               "forgeVersion": project.forge_version
+                "minecraftVersion": project.minecraft_version,
+                "architecturyVersion": project.architectury_version,
+                "forgeVersion": project.forge_version
     }
 }
 
