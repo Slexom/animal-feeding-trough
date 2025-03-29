@@ -107,7 +107,7 @@ public class FeedingTroughBlockEntity extends BlockEntity implements MenuProvide
     protected void loadAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
         super.loadAdditional(nbt, registryLookup);
         ContainerHelper.loadAllItems(nbt, this.inventory, registryLookup);
-        this.storedExp = nbt.getInt(NBT_STORED_EXP);
+        this.storedExp = nbt.getIntOr(NBT_STORED_EXP, 0);
     }
 
     @Override
