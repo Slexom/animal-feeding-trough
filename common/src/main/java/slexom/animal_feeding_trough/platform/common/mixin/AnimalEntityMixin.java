@@ -45,7 +45,7 @@ public class AnimalEntityMixin extends Mob {
                 .toList()
                 .forEach(prioritizedGoal -> {
                     TemptGoal goal = (TemptGoal) prioritizedGoal.getGoal();
-                    PathfinderMob mob = ((TemptGoalAccessor) goal).getMob();
+                    Mob mob = ((TemptGoalAccessor) goal).getMob();
                     double speed = ((TemptGoalAccessor) goal).getSpeed();
                     Predicate<ItemStack> foodPredicate = (((TemptGoalAccessor) goal).getFoodPredicate());
                     boolean hasForbiddenFood = false;
