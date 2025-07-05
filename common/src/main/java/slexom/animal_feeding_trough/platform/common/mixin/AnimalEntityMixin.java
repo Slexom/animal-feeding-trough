@@ -2,7 +2,6 @@ package slexom.animal_feeding_trough.platform.common.mixin;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.item.Item;
@@ -14,7 +13,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import slexom.animal_feeding_trough.platform.common.goal.entity.ai.SelfFeedGoal;
+import slexom.animal_feeding_trough.platform.common.world.entity.ai.goal.SelfFeedGoal;
 
 import java.util.Arrays;
 import java.util.function.Predicate;

@@ -1,4 +1,4 @@
-package slexom.animal_feeding_trough.platform.common.block.entity;
+package slexom.animal_feeding_trough.platform.common.world.level.block.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
@@ -20,9 +20,9 @@ import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.Nullable;
 import slexom.animal_feeding_trough.platform.common.AnimalFeedingTroughMod;
-import slexom.animal_feeding_trough.platform.common.block.FeedingTroughBlock;
-import slexom.animal_feeding_trough.platform.common.inventory.BlockEntityInventory;
-import slexom.animal_feeding_trough.platform.common.screen.FeedingTroughScreenHandler;
+import slexom.animal_feeding_trough.platform.common.world.level.block.FeedingTroughBlock;
+import slexom.animal_feeding_trough.platform.common.world.inventory.BlockEntityInventory;
+import slexom.animal_feeding_trough.platform.common.world.inventory.FeedingTroughMenu;
 
 import java.util.List;
 
@@ -95,7 +95,7 @@ public class FeedingTroughBlockEntity extends BlockEntity implements MenuProvide
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int syncId, Inventory playerInventory, Player player) {
-        return new FeedingTroughScreenHandler(syncId, playerInventory, this);
+        return new FeedingTroughMenu(syncId, playerInventory, this);
     }
 
     @Override

@@ -1,22 +1,22 @@
-package slexom.animal_feeding_trough.platform.common.screen;
+package slexom.animal_feeding_trough.platform.common.client.gui.screens.inventory;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import slexom.animal_feeding_trough.platform.common.AnimalFeedingTroughMod;
+import slexom.animal_feeding_trough.platform.common.world.inventory.FeedingTroughMenu;
 
 @Environment(EnvType.CLIENT)
-public class FeedingTroughScreen extends AbstractContainerScreen<FeedingTroughScreenHandler> {
+public class FeedingTroughScreen extends AbstractContainerScreen<FeedingTroughMenu> {
 
     private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AnimalFeedingTroughMod.MOD_ID, "textures/gui/container/feeding_trough.png");
 
-    public FeedingTroughScreen(FeedingTroughScreenHandler handler, Inventory inventory, Component title) {
+    public FeedingTroughScreen(FeedingTroughMenu handler, Inventory inventory, Component title) {
         super(handler, inventory, title);
     }
 

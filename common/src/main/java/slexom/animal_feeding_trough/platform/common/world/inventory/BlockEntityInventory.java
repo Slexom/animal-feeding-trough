@@ -1,4 +1,4 @@
-package slexom.animal_feeding_trough.platform.common.inventory;
+package slexom.animal_feeding_trough.platform.common.world.inventory;
 
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.Container;

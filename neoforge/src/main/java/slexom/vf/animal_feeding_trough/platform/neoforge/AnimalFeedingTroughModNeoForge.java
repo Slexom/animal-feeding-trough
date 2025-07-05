@@ -8,7 +8,7 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import slexom.animal_feeding_trough.platform.common.AnimalFeedingTroughMod;
-import slexom.animal_feeding_trough.platform.common.screen.FeedingTroughScreen;
+import slexom.animal_feeding_trough.platform.common.client.gui.screens.inventory.FeedingTroughScreen;
 
 @Mod(AnimalFeedingTroughMod.MOD_ID)
 public class AnimalFeedingTroughModNeoForge {
@@ -30,6 +30,6 @@ public class AnimalFeedingTroughModNeoForge {
     }
 
     private void registerScreens(RegisterMenuScreensEvent event) {
-        event.register(AnimalFeedingTroughMod.FEEDING_TROUGH_SCREEN_HANDLER.get(), FeedingTroughScreen::new);
+        event.register(AnimalFeedingTroughMod.FEEDING_TROUGH_MENU.get(), FeedingTroughScreen::new);
     }
 }

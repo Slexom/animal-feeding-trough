@@ -1,16 +1,24 @@
 {
-    "required": true,
-    "minVersion": "0.8",
-    "package": "slexom.animal_feeding_trough.platform.common.mixin",
-    "compatibilityLevel": "JAVA_21",
-    "injectors": {
-        "defaultRequire": 1
-    },
-    "mixins": [
-        "AnimalEntityMixin",
-        "GoalSelectorAccessor",
-        "TemptGoalAccessor"
-    ],
-    "client": [
-    ]
+  "required": true,
+  "minVersion": "0.8",
+  "package": "slexom.animal_feeding_trough.platform.common.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "mixins": [
+    "AnimalEntityMixin",
+    "ArmadilloAiMixin",
+    "AxolotlAiMixin",
+    "AxolotlMixin",
+    "CamelAiMixin",
+    "FrogAiMixin",
+    "FrogMixin",
+    "GoalSelectorAccessor",
+    "GoatAiMixin",
+    "GoatMixin",
+    "TemptGoalAccessor"
+  ],
+  "client": [
+  ]
 }

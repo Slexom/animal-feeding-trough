@@ -1,4 +1,4 @@
-package slexom.animal_feeding_trough.platform.common.screen;
+package slexom.animal_feeding_trough.platform.common.world.inventory;
 
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -9,15 +9,15 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import slexom.animal_feeding_trough.platform.common.AnimalFeedingTroughMod;
 
-public class FeedingTroughScreenHandler extends AbstractContainerMenu {
+public class FeedingTroughMenu extends AbstractContainerMenu {
     private final Container inventory;
 
-    public FeedingTroughScreenHandler(int syncId, Inventory playerInventory) {
+    public FeedingTroughMenu(int syncId, Inventory playerInventory) {
         this(syncId, playerInventory, new SimpleContainer(1));
     }
 
-    public FeedingTroughScreenHandler(int syncId, Inventory playerInventory, Container inventory) {
-        super(AnimalFeedingTroughMod.FEEDING_TROUGH_SCREEN_HANDLER.get(), syncId);
+    public FeedingTroughMenu(int syncId, Inventory playerInventory, Container inventory) {
+        super(AnimalFeedingTroughMod.FEEDING_TROUGH_MENU.get(), syncId);
         checkContainerSize(inventory, 1);
         this.inventory = inventory;
         inventory.startOpen(playerInventory.player);

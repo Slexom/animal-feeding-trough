@@ -1,4 +1,4 @@
-package slexom.animal_feeding_trough.platform.common.goal.entity.ai;
+package slexom.animal_feeding_trough.platform.common.world.entity.ai.goal;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.ai.goal.MoveToBlockGoal;
@@ -7,7 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import slexom.animal_feeding_trough.platform.common.block.entity.FeedingTroughBlockEntity;
+import slexom.animal_feeding_trough.platform.common.world.level.block.entity.FeedingTroughBlockEntity;
 
 import java.util.function.Predicate;
 
