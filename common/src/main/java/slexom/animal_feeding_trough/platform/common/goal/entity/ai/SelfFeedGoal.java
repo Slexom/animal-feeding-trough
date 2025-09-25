@@ -64,7 +64,7 @@ public class SelfFeedGoal extends MoveToBlockGoal {
                 this.mob.getLookControl().setLookAt((double) this.blockPos.getX() + 0.5D, this.blockPos.getY(), (double) this.blockPos.getZ() + 0.5D, 10.0F, (float) this.mob.getMaxHeadXRot());
                 if (this.isReachedTarget()) {
                     this.feeder.getItems().get(0).shrink(1);
-                    this.mob.setInLove(null);
+                    this.mob.setInLoveTime(600);
                 }
             }
             this.feeder = null;
