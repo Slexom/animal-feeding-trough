@@ -12,12 +12,15 @@
     "AxolotlAiMixin",
     "AxolotlMixin",
     "CamelAiMixin",
+    "CopperGolemAiMixin",
     "FrogAiMixin",
     "FrogMixin",
     "GoalSelectorAccessor",
     "GoatAiMixin",
     "GoatMixin",
-    "TemptGoalAccessor"
+    "TemptGoalAccessor",
+    "TransportItemsBetweenContainersAccessor",
+    "TransportItemsBetweenContainersMixin"
   ],
   "client": [
   ]

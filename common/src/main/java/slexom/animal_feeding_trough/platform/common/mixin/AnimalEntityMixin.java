@@ -33,7 +33,7 @@ public class AnimalEntityMixin extends Mob {
             return;
         }
 
-        if (world.isClientSide) {
+        if (world.isClientSide()) {
             return;
         }
 

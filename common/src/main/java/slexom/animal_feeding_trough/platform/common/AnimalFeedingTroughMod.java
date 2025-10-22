@@ -1,7 +1,7 @@
 package slexom.animal_feeding_trough.platform.common;
 
 import com.google.common.base.Suppliers;
-import dev.architectury.registry.menu.MenuRegistry;
+import dev.architectury.registry.client.gui.MenuScreenRegistry;
 import dev.architectury.registry.registries.Registrar;
 import dev.architectury.registry.registries.RegistrarManager;
 import dev.architectury.registry.registries.RegistrySupplier;
@@ -88,7 +88,7 @@ public class AnimalFeedingTroughMod {
     public static RegistrySupplier<BlockEntityType<FeedingTroughBlockEntity>> FEEDING_TROUGH_BLOCK_ENTITY = BLOCK_ENTITY_TYPE_REGISTRAR.register(REGISTRY_NAME, () -> new BlockEntityType<>(FeedingTroughBlockEntity::new, Set.of(FEEDING_TROUGH_BLOCK.get())));
 
     public static void onInitializeClient() {
-        MenuRegistry.registerScreenFactory(FEEDING_TROUGH_MENU.get(), FeedingTroughScreen::new);
+        MenuScreenRegistry.registerScreenFactory(FEEDING_TROUGH_MENU.get(), FeedingTroughScreen::new);
     }
 
 }

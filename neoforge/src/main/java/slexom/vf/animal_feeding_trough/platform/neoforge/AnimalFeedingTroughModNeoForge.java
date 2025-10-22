@@ -14,7 +14,7 @@ import slexom.animal_feeding_trough.platform.common.client.gui.screens.inventory
 public class AnimalFeedingTroughModNeoForge {
 
     public AnimalFeedingTroughModNeoForge(IEventBus modEventBus) {
-        if (FMLEnvironment.dist == Dist.CLIENT) {
+        if (FMLEnvironment.getDist() == Dist.CLIENT) {
             modEventBus.addListener(this::setupClient);
             modEventBus.addListener(this::registerScreens);
         }

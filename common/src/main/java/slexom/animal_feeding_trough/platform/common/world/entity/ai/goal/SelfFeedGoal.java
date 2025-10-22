@@ -59,7 +59,7 @@ public class SelfFeedGoal extends MoveToBlockGoal {
     @Override
     public void tick() {
         Level world = this.mob.level();
-        if (!world.isClientSide && this.feeder != null && this.mob.canFallInLove()) {
+        if (!world.isClientSide() && this.feeder != null && this.mob.canFallInLove()) {
             if (!this.feeder.getItems().get(0).isEmpty()) {
                 this.mob.getLookControl().setLookAt((double) this.blockPos.getX() + 0.5D, this.blockPos.getY(), (double) this.blockPos.getZ() + 0.5D, 10.0F, (float) this.mob.getMaxHeadXRot());
                 if (this.isReachedTarget()) {
