@@ -1,6 +1,6 @@
 package slexom.animal_feeding_trough.platform.common.mixin;
 
-import net.minecraft.world.entity.animal.coppergolem.CopperGolemAi;
+import net.minecraft.world.entity.animal.golem.CopperGolemAi;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
