@@ -16,15 +16,17 @@ import java.util.function.Predicate;
 @Mixin(CopperGolemAi.class)
 public class CopperGolemAiMixin {
 
-    @Final
-    @Shadow
-    @Mutable
-    private static Predicate<BlockState> TRANSPORT_ITEM_DESTINATION_BLOCK;
+	@Final
+	@Shadow
+	@Mutable
+	private static Predicate<BlockState> TRANSPORT_ITEM_DESTINATION_BLOCK;
 
-    @Inject(method = "<clinit>", at = @At("TAIL"))
-    private static void animal_feeding_trough$transportItemDestinationBlock(CallbackInfo ci) {
-        Predicate<BlockState> original = TRANSPORT_ITEM_DESTINATION_BLOCK;
-
-        TRANSPORT_ITEM_DESTINATION_BLOCK = blockState -> blockState.is(AnimalFeedingTroughMod.FEEDING_TROUGH_BLOCK.get()) || original.test(blockState);
-    }
+	@Inject(method = "<clinit>", at = @At("TAIL"))
+	private static void animal_feeding_trough$transportItemDestinationBlock(CallbackInfo ci) {
+		Predicate<BlockState> original = TRANSPORT_ITEM_DESTINATION_BLOCK;
+		TRANSPORT_ITEM_DESTINATION_BLOCK = blockState ->
+				(AnimalFeedingTroughMod.FEEDING_TROUGH_BLOCK != null
+						&& blockState.is(AnimalFeedingTroughMod.FEEDING_TROUGH_BLOCK.get()))
+						|| original.test(blockState);
+	}
 }

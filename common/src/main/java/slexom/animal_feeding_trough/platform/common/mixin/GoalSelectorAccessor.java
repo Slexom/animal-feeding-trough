@@ -10,7 +10,7 @@ import java.util.Set;
 @Mixin(GoalSelector.class)
 public interface GoalSelectorAccessor {
 
-    @Accessor("availableGoals")
-    Set<WrappedGoal> getGoals();
+	@Accessor("availableGoals")
+	Set<WrappedGoal> getGoals();
 
 }

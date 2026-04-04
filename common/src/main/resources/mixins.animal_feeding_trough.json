@@ -2,16 +2,19 @@
   "required": true,
   "minVersion": "0.8",
   "package": "slexom.animal_feeding_trough.platform.common.mixin",
-  "compatibilityLevel": "JAVA_21",
+  "compatibilityLevel": "JAVA_25",
   "injectors": {
     "defaultRequire": 1
   },
   "mixins": [
     "AnimalEntityMixin",
     "ArmadilloAiMixin",
+    "ArmadilloMixin",
     "AxolotlAiMixin",
     "AxolotlMixin",
+    "BrainAccessor",
     "CamelAiMixin",
+    "CamelMixin",
     "CopperGolemAiMixin",
     "FrogAiMixin",
     "FrogMixin",

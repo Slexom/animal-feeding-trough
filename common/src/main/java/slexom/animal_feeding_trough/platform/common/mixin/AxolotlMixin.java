@@ -1,41 +1,35 @@
 package slexom.animal_feeding_trough.platform.common.mixin;
 
-import com.google.common.collect.ImmutableList;
-import net.minecraft.world.entity.ai.memory.MemoryModuleType;
-import net.minecraft.world.entity.ai.sensing.Sensor;
-import net.minecraft.world.entity.ai.sensing.SensorType;
+import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.animal.axolotl.Axolotl;
-import org.spongepowered.asm.mixin.Final;
+import net.minecraft.world.item.Items;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Mutable;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import slexom.animal_feeding_trough.platform.common.AnimalFeedingTroughMod;
+import slexom.animal_feeding_trough.platform.common.world.entity.ai.sensing.FeedingTroughSensor;
+
 
 @Mixin(Axolotl.class)
 public class AxolotlMixin {
-    @Mutable
-    @Shadow
-    @Final
-    protected static ImmutableList<SensorType<? extends Sensor<? super Axolotl>>> SENSOR_TYPES;
 
-    @Mutable
-    @Shadow
-    @Final
-    protected static ImmutableList<MemoryModuleType<?>> MEMORY_TYPES;
+	@Inject(method = "makeBrain", at = @At("RETURN"))
+	private void animal_feeding_trough$injectSensor(
+			Brain.Packed packedBrain,
+			CallbackInfoReturnable<Brain<Axolotl>> cir
+	) {
+		Brain<Axolotl> brain = cir.getReturnValue();
 
-    @Inject(method = "<clinit>", at = @At("TAIL"))
-    private static void animal_feeding_trough$addFeedingTroughSensorAndMemory(CallbackInfo ci) {
-        SENSOR_TYPES = ImmutableList.<SensorType<? extends Sensor<? super Axolotl>>>builder()
-                .addAll(SENSOR_TYPES)
-                .add(AnimalFeedingTroughMod.AXOLOTL_TEMPTATIONS.get())
-                .build();
+		BrainAccessor<Axolotl> accessor = (BrainAccessor<Axolotl>) brain;
 
-        MEMORY_TYPES = ImmutableList.<MemoryModuleType<?>>builder()
-                .addAll(MEMORY_TYPES)
-                .add(AnimalFeedingTroughMod.FEEDING_TROUGH_MEMORY_MODULE.get())
-                .build();
-    }
+		accessor.animal_feeding_trough$registerMemory(
+				AnimalFeedingTroughMod.FEEDING_TROUGH_MEMORY_MODULE.get()
+		);
+
+		accessor.animal_feeding_trough$getSensors().put(
+				AnimalFeedingTroughMod.AXOLOTL_TEMPTATIONS.get(),
+				new FeedingTroughSensor(stack -> stack.is(Items.TROPICAL_FISH))
+		);
+	}
 }

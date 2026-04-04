@@ -13,63 +13,68 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import slexom.animal_feeding_trough.platform.common.AnimalFeedingTroughMod;
 import slexom.animal_feeding_trough.platform.common.world.level.block.entity.FeedingTroughBlockEntity;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
+
 public class FeedingTroughSensor extends Sensor<PathfinderMob> {
-    private final Predicate<ItemStack> temptations;
+	private final Predicate<ItemStack> temptations;
 
-    public FeedingTroughSensor(Predicate<ItemStack> predicate) {
-        this.temptations = predicate;
-    }
+	public FeedingTroughSensor(Predicate<ItemStack> predicate) {
+		this.temptations = predicate;
+	}
 
-    protected void doTick(ServerLevel serverLevel, PathfinderMob pathfinderMob) {
-        Brain<?> brain = pathfinderMob.getBrain();
-        MemoryModuleType<FeedingTroughBlockEntity> memoryModule = AnimalFeedingTroughMod.FEEDING_TROUGH_MEMORY_MODULE.get();
+	protected void doTick(ServerLevel level, PathfinderMob pathfinderMob) {
+		Brain<?> brain = pathfinderMob.getBrain();
+		MemoryModuleType<FeedingTroughBlockEntity> memoryModule = AnimalFeedingTroughMod.FEEDING_TROUGH_MEMORY_MODULE.get();
 
-        BlockPos mobPos = pathfinderMob.getOnPos();
+		BlockPos center = pathfinderMob.blockPosition();
+		int radius = Math.max(10, (int) pathfinderMob.getAttributeValue(Attributes.TEMPT_RANGE));
 
-        List<FeedingTroughBlockEntity> foundEntities = new ArrayList<>();
+		FeedingTroughBlockEntity closest = null;
+		double closestDistance = Double.MAX_VALUE;
 
-        int radius = (int) pathfinderMob.getAttributeValue(Attributes.TEMPT_RANGE);
-        BlockPos minPos = mobPos.offset(-radius, -radius, -radius);
-        BlockPos maxPos = mobPos.offset(radius, radius, radius);
+		for (BlockPos pos : BlockPos.withinManhattan(center, radius, radius, radius)) {
+			if (!pos.closerThan(center, radius)) {
+				continue;
+			}
 
-        for (BlockPos pos : BlockPos.betweenClosed(minPos, maxPos)) {
-            if (pos.distSqr(pos) <= radius * radius) {
-                BlockEntity blockEntity = serverLevel.getBlockEntity(pos);
+			BlockEntity blockEntity = level.getBlockEntity(pos);
+			if (!(blockEntity instanceof FeedingTroughBlockEntity trough)) {
+				continue;
+			}
 
-                if (blockEntity instanceof FeedingTroughBlockEntity) {
-                    foundEntities.add((FeedingTroughBlockEntity) blockEntity);
-                }
-            }
-        }
+			if (trough.getItems().isEmpty()) {
+				continue;
+			}
 
-        List<FeedingTroughBlockEntity> list = foundEntities
-                .stream()
-                .filter(entity -> isTemptation(entity.getItems().get(0)))
-                .sorted(Comparator.comparingDouble(value -> pathfinderMob.distanceToSqr(value.getBlockPos().getX(), value.getBlockPos().getY(), value.getBlockPos().getZ())))
-                .toList();
+			ItemStack stack = trough.getItems().getFirst();
 
-        if (!list.isEmpty()) {
-            FeedingTroughBlockEntity feedingTroughBlockEntity = list.get(0);
-            brain.setMemory(memoryModule, feedingTroughBlockEntity);
-        } else {
-            brain.eraseMemory(memoryModule);
-        }
-    }
+			if (!this.temptations.test(stack)) {
+				continue;
+			}
 
+			double distance = pathfinderMob.distanceToSqr(
+					pos.getX() + 0.5,
+					pos.getY() + 0.5,
+					pos.getZ() + 0.5
+			);
 
-    private boolean isTemptation(ItemStack itemStack) {
-        return this.temptations.test(itemStack);
-    }
+			if (distance < closestDistance) {
+				closestDistance = distance;
+				closest = trough;
+			}
+		}
 
-    @Override
-    public Set<MemoryModuleType<?>> requires() {
-        return ImmutableSet.of(AnimalFeedingTroughMod.FEEDING_TROUGH_MEMORY_MODULE.get());
-    }
+		if (closest != null) {
+			brain.setMemory(memoryModule, closest);
+		} else {
+			brain.eraseMemory(memoryModule);
+		}
+	}
 
+	@Override
+	public Set<MemoryModuleType<?>> requires() {
+		return ImmutableSet.of(AnimalFeedingTroughMod.FEEDING_TROUGH_MEMORY_MODULE.get());
+	}
 }

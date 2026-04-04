@@ -1,5 +1,5 @@
 plugins {
-    id "com.github.johnrengelman.shadow"
+    id "com.gradleup.shadow"
 }
 
 loom {
@@ -29,35 +29,38 @@ configurations {
 }
 
 dependencies {
-    modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
+    implementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
 
     // Fabric API. This is technically optional, but you probably want it anyway.
-    modImplementation "net.fabricmc.fabric-api:fabric-api:$rootProject.fabric_api_version"
+    implementation "net.fabricmc.fabric-api:fabric-api:$rootProject.fabric_api_version"
 
-    // Architectury API. This is optional, and you can comment it out if you don't need it.
-    modImplementation "dev.architectury:architectury-fabric:$rootProject.architectury_api_version"
-
-    common(project(path: ':common', configuration: 'namedElements')) { transitive false }
+    common(project(path: ":common")) { transitive false }
     shadowBundle project(path: ':common', configuration: 'transformProductionFabric')
 }
 
 processResources {
     inputs.property "version", project.version
     inputs.property "mc_version", project.minecraft_version
+    inputs.property "api_version", project.fabric_api_version
     inputs.property "loader_version", project.fabric_loader_version
 
     filesMatching("fabric.mod.json") {
         expand "version": project.version,
                 "mc_version": project.minecraft_version,
+                "api_version": project.fabric_api_version,
                 "loader_version": project.fabric_loader_version
     }
 }
 
-shadowJar {
-    configurations = [project.configurations.shadowBundle]
-    archiveClassifier = 'dev-shadow'
+jar {
+    archiveClassifier = "raw"
 }
 
-remapJar {
-    input.set shadowJar.archiveFile
+shadowJar {
+    dependsOn(jar)
+    mainSpec.sourcePaths.clear()
+    from(zipTree(jar.archiveFile))
+
+    configurations = [project.configurations.shadowBundle]
+    archiveClassifier = null
 }

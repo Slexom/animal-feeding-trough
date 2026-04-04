@@ -2,40 +2,55 @@ package slexom.animal_feeding_trough.platform.common.mixin;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
+import net.minecraft.world.entity.ai.ActivityData;
 import net.minecraft.world.entity.ai.behavior.BehaviorControl;
 import net.minecraft.world.entity.animal.frog.Frog;
 import net.minecraft.world.entity.animal.frog.FrogAi;
+import net.minecraft.world.entity.schedule.Activity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import slexom.animal_feeding_trough.platform.common.world.entity.ai.behavior.SelfFeed;
 
 @Mixin(FrogAi.class)
 public class FrogAiMixin {
 
-    @ModifyArg(method = "initSwimActivity",
-            at = @At(value = "INVOKE",
-                    target = "Lnet/minecraft/world/entity/ai/Brain;addActivityWithConditions(Lnet/minecraft/world/entity/schedule/Activity;Lcom/google/common/collect/ImmutableList;Ljava/util/Set;)V"),
-            index = 1)
-    private static ImmutableList<Pair<Integer, ? extends BehaviorControl<? super Frog>>> animal_feeding_trough$modifySwimActivity(
-            ImmutableList<Pair<Integer, ? extends BehaviorControl<? super Frog>>> originalList) {
+	@Inject(
+			method = "initSwimActivity",
+			at = @At("RETURN"),
+			cancellable = true
+	)
+	private static void animal_feeding_trough$initSwimActivity(
+			CallbackInfoReturnable<ActivityData<Frog>> cir
+	) {
+		ActivityData<Frog> original = cir.getReturnValue();
 
-        return ImmutableList.<Pair<Integer, ? extends BehaviorControl<? super Frog>>>builder()
-                .addAll(originalList)
-                .add(Pair.of(1, new SelfFeed(livingEntity -> 1.25F)))
-                .build();
-    }
+		ImmutableList<Pair<Integer, ? extends BehaviorControl<? super Frog>>> newBehaviors =
+				ImmutableList.<Pair<Integer, ? extends BehaviorControl<? super Frog>>>builder()
+						.addAll(original.behaviorPriorityPairs())
+						.add(Pair.of(1, new SelfFeed(_ -> 1.25F)))
+						.build();
 
-    @ModifyArg(method = "initIdleActivity",
-            at = @At(value = "INVOKE",
-                    target = "Lnet/minecraft/world/entity/ai/Brain;addActivityWithConditions(Lnet/minecraft/world/entity/schedule/Activity;Lcom/google/common/collect/ImmutableList;Ljava/util/Set;)V"),
-            index = 1)
-    private static ImmutableList<Pair<Integer, ? extends BehaviorControl<? super Frog>>> animal_feeding_trough$modifyIdleActivity(
-            ImmutableList<Pair<Integer, ? extends BehaviorControl<? super Frog>>> originalList) {
+		cir.setReturnValue(ActivityData.create(Activity.SWIM, newBehaviors));
+	}
 
-        return ImmutableList.<Pair<Integer, ? extends BehaviorControl<? super Frog>>>builder()
-                .addAll(originalList)
-                .add(Pair.of(1, new SelfFeed(livingEntity -> 1.25F)))
-                .build();
-    }
+	@Inject(
+			method = "initIdleActivity",
+			at = @At("RETURN"),
+			cancellable = true
+	)
+	private static void animal_feeding_trough$initIdleActivity(
+			CallbackInfoReturnable<ActivityData<Frog>> cir
+	) {
+		ActivityData<Frog> original = cir.getReturnValue();
+
+		ImmutableList<Pair<Integer, ? extends BehaviorControl<? super Frog>>> newBehaviors =
+				ImmutableList.<Pair<Integer, ? extends BehaviorControl<? super Frog>>>builder()
+						.addAll(original.behaviorPriorityPairs())
+						.add(Pair.of(1, new SelfFeed(_ -> 1.25F)))
+						.build();
+
+		cir.setReturnValue(ActivityData.create(Activity.IDLE, newBehaviors));
+	}
 }
