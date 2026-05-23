@@ -3,6 +3,8 @@ package slexom.animal_feeding_trough.platform.fabric;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.fabricmc.fabric.api.transfer.v1.item.ContainerStorage;
+import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -38,7 +40,7 @@ public class AnimalFeedingTroughModFabric implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-	 	registerSensors();
+		registerSensors();
 		registerMemory();
 		registerBlocks();
 		registerBlockEntities();
@@ -82,7 +84,7 @@ public class AnimalFeedingTroughModFabric implements ModInitializer {
 		Registry.register(BuiltInRegistries.BLOCK, ID, block);
 		AnimalFeedingTroughMod.FEEDING_TROUGH_BLOCK = () -> block;
 
-		BlockItem blockItem = new BlockItem(block, new Item.Properties().setId(itemKey).useBlockDescriptionPrefix() );
+		BlockItem blockItem = new BlockItem(block, new Item.Properties().setId(itemKey).useBlockDescriptionPrefix());
 		Registry.register(BuiltInRegistries.ITEM, ID, blockItem);
 		AnimalFeedingTroughMod.FEEDING_TROUGH_BLOCK_ITEM = () -> blockItem;
 
@@ -93,6 +95,11 @@ public class AnimalFeedingTroughModFabric implements ModInitializer {
 		BlockEntityType<FeedingTroughBlockEntity> type = FabricBlockEntityTypeBuilder.create(FeedingTroughBlockEntity::new, AnimalFeedingTroughMod.FEEDING_TROUGH_BLOCK.get()).build();
 		Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, ID, type);
 		AnimalFeedingTroughMod.FEEDING_TROUGH_BLOCK_ENTITY = () -> type;
+
+		ItemStorage.SIDED.registerForBlockEntity(
+				ContainerStorage::of,
+				AnimalFeedingTroughMod.FEEDING_TROUGH_BLOCK_ENTITY.get()
+		);
 	}
 
 	private void registerMenus() {

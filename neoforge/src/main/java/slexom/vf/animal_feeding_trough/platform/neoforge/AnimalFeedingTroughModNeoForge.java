@@ -19,9 +19,12 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.transfer.item.VanillaContainerWrapper;
 import slexom.animal_feeding_trough.platform.common.AnimalFeedingTroughMod;
 import slexom.animal_feeding_trough.platform.common.world.entity.ai.sensing.FeedingTroughSensor;
 import slexom.animal_feeding_trough.platform.common.world.inventory.FeedingTroughMenu;
@@ -121,6 +124,7 @@ public class AnimalFeedingTroughModNeoForge {
 		SENSORS.register(modEventBus);
 
 		modEventBus.addListener(this::onBuildCreativeTab);
+		modEventBus.addListener(this::registerCapabilities);
 
 		AnimalFeedingTroughMod.FEEDING_TROUGH_BLOCK = FEEDING_TROUGH_BLOCK;
 		AnimalFeedingTroughMod.FEEDING_TROUGH_BLOCK_ITEM = FEEDING_TROUGH_BLOCK_ITEM;
@@ -134,6 +138,14 @@ public class AnimalFeedingTroughModNeoForge {
 		AnimalFeedingTroughMod.ARMADILLO_TEMPTATIONS = ARMADILLO_TEMPTATIONS;
 
 		AnimalFeedingTroughMod.onInitialize();
+	}
+
+	private void registerCapabilities(RegisterCapabilitiesEvent event) {
+		event.registerBlockEntity(
+				Capabilities.Item.BLOCK,
+				AnimalFeedingTroughMod.FEEDING_TROUGH_BLOCK_ENTITY.get(),
+				(blockEntity, side) -> VanillaContainerWrapper.of(blockEntity)
+		);
 	}
 
 	private void onBuildCreativeTab(BuildCreativeModeTabContentsEvent event) {
