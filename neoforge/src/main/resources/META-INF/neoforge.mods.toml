@@ -16,14 +16,14 @@ logoFile = "icon.png"
 [[dependencies.animal_feeding_trough]]
 modId = "minecraft"
 type = "required"
-versionRange = "[26.1.2,)"
+versionRange = "[26.2,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.animal_feeding_trough]]
 modId = "neoforge"
 type = "required"
-versionRange = "[26.1.2.1-beta,)"
+versionRange = "[26.2.0.2-beta,)"
 ordering = "NONE"
 side = "BOTH"
 

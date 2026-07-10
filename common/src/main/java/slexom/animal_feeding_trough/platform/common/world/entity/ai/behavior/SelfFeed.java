@@ -13,6 +13,7 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.memory.WalkTarget;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.phys.Vec3;
 import slexom.animal_feeding_trough.platform.common.AnimalFeedingTroughMod;
 import slexom.animal_feeding_trough.platform.common.world.level.block.entity.FeedingTroughBlockEntity;
 
@@ -97,7 +98,7 @@ public class SelfFeed extends Behavior<Animal> {
 		brain.setMemory(MemoryModuleType.LOOK_TARGET, tracker);
 
 		double d = this.closeEnoughDistance.apply(animal);
-		if (animal.distanceToSqr(blockPos.getCenter()) < Mth.square(d) && animal.canFallInLove()) {
+		if (animal.distanceToSqr(Vec3.atCenterOf(blockPos)) < Mth.square(d) && animal.canFallInLove()) {
 			brain.eraseMemory(MemoryModuleType.WALK_TARGET);
 			feedingTroughBlockEntity.getItems().getFirst().shrink(1);
 			animal.setInLove(null);
